@@ -73,6 +73,8 @@ while match_no!=-1:
 		for row in table.findAll('div',attrs={'class':'cb-col cb-col-100 cb-min-tm'}):
 			team2=1
 			print(row.text)
+		for row in table.findAll('div',attrs={'class':'cb-text-rain'}):
+			print(row.text+". Stay tuned!")	
 		if team2==1 and team1==1:
 			for row in table.findAll('div',attrs={'class':'cb-col cb-col-100 cb-min-stts cb-text-mom'}):
 				print(row.text)
