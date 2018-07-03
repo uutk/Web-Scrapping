@@ -1,4 +1,4 @@
-#Python Web Scrapping Program to know live cricket scores using BeautifulSoup
+#Web Scrapping Program to know live cricket scores using Python and BeautifulSoup
 import requests
 import tables
 from bs4 import BeautifulSoup
@@ -7,34 +7,19 @@ import csv
 URL = "http://www.cricbuzz.com/cricket-match/live-scores"
 r = requests.get(URL)
 soup = BeautifulSoup(r.content, 'html5lib')
-p=0
+p=1
 scores=[]
 url_store=[]
 #storing content of live-score page.
 table=soup.find('div', attrs = {'class':'cb-bg-white cb-col-100 cb-col'})
 #Retriving only required information
 for row in table.findAll('div', attrs = {'class':'cb-col cb-col-100 cb-lv-main'}):
-    quote = {}
     quote1= {}
     quote1['url']=row.a['href']
-    quote['no']=p+1
-    quote['match']= row.a['title']
+    name= row.a['title']
+    print("      {0}.{1}".format(p,name))
     p=p+1
     url_store.append(quote1)
-    scores.append(quote)
-#storing match details in a file.    
-filename = 'current_matches.csv'
-with open(filename, 'wb') as f:
-    w = csv.DictWriter(f,['no','match'])
-    w.writeheader()
-    for quote in scores:
-        w.writerow(quote)
-file = open(filename, 'r')
-#displaying livbe match details
-for each in file:
-    break
-for each in file:
-    print(each)
 #storing URLs of live matches in a file.    
 filename_url = 'current_matches_url.csv'
 with open(filename_url, 'wb') as f:
@@ -67,6 +52,7 @@ while match_no!=-1:
 		team1=0
 		team2=0
 		#Retriving only required data.
+		#print(table.prettify())
 		for row in table.findAll('div',attrs={'class':'cb-col cb-col-100 cb-min-tm cb-text-gray'}):
 			team1=1
 			print(row.text)
@@ -98,3 +84,4 @@ while match_no!=-1:
 		elif match_no==-1:
 			print("Good Bye!")
 			break			
+	print("")		
